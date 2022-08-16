@@ -1,0 +1,59 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Karla';
+}
+
+.main-menu {
+    position: relative;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: rgba(41, 50, 100, 1);
+}
+
+.yellow-blob {
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+
+.blue-blob {
+    position: absolute;
+    bottom: 0%;
+    left: 0;
+}
+
+.main-menu-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+}
+
+h1 {
+    font-size: 5rem;
+    font-weight: 700;
+}
+
+h4 {
+    font-size: 2rem;
+    font-weight: 300;
+}
+
+.main-menu--start-button {
+    border: none;
+    height: 5rem;
+    width: 20rem;
+    background: rgba(77, 91, 158, 1);
+    border-radius: 15px;
+    color: rgba(245, 247, 251, 1);
+    font-size: 2rem;
+}
+
+.main-menu--start-button:hover {
+    cursor: pointer;
+}
