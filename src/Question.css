@@ -1,0 +1,28 @@
+* {
+    /* border: solid red 1px; */
+}
+
+.question-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    color: rgba(41, 50, 100, 1);
+}
+
+.question-question {
+    font-size: 2rem;
+}
+
+.question-option-list {
+    list-style: none;
+    display: flex;
+    gap: 1.5rem;
+}
+
+.question-option {
+    border: solid rgba(77, 91, 158, 1) 1px;
+    border-radius: 0.5rem;
+    font-size: 1.5rem;
+
+}

@@ -1,0 +1,8 @@
+.trivia-page {
+    padding: 10rem;
+}
+
+.trivia-questions-container {
+    display: grid;
+    gap: 1.5rem;
+}
