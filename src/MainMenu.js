@@ -1,9 +1,9 @@
 import React from 'react';
-import './Main.css';
+import './MainMenu.css';
 import yellow_blob from './yellow_blob.png';
 import blue_blob from './blue_blob.png';
 
-export const Main = () => {
+export const MainMenu = (props) => {
     return (
         <div className='main-menu'>
             <img src={yellow_blob} className='yellow-blob' alt='yellow-blob' />
@@ -11,7 +11,12 @@ export const Main = () => {
             <div className='main-menu-content'>
                 <h1>Quizzical</h1>
                 <h4>An exciting trivia game!</h4>
-                <button className='main-menu--start-button'>Start quiz</button>
+                <button 
+                    className='main-menu--start-button' 
+                    onClick={props.handleClick}
+                    >
+                        Start quiz
+                </button>
             </div>
         </div>
     )

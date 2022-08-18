@@ -1,10 +1,8 @@
 import './App.css';
-import { Main } from './Main';
-import { Question } from './Question';
-import { Trivia } from './Trivia';
+import { Trivia_Game } from './Trivia_Game';
 
 function App() {
-  return <Trivia />
+  return <Trivia_Game />
 }
 
 export default App;

@@ -1,8 +1,27 @@
 .trivia-page {
     padding: 10rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
 }
 
 .trivia-questions-container {
     display: grid;
     gap: 1.5rem;
+}
+
+.trivia-back-to-main-button {
+    border: none;
+    height: 2.5rem;
+    width: 15rem;
+    background: rgba(77, 91, 158, 1);
+    border-radius: 15px;
+    color: rgba(245, 247, 251, 1);
+    font-size: 1.25rem;
+}
+
+.trivia-back-to-main-button:hover {
+    cursor: pointer;
 }
