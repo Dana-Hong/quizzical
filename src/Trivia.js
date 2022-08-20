@@ -6,7 +6,7 @@ import blue_blob from './blue_blob.png';
 
 export const Trivia = (props) => {
     const questionElements = props.triviaData.map(questionData => {
-        return <Question data={questionData} />
+        return <Question data={questionData} handleClick={() => {console.log('hey')}} />
     })
 
     return (

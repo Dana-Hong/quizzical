@@ -9,7 +9,16 @@ export const Question = (props) => {
     let options = [...props.data.incorrect_answers]
     options.splice(randomIndex, 0, props.data.correct_answer);
     
-    const optionElements = options.map(option => <li key={nanoid()} className='question-option'>{decode(option)}</li>)
+    const optionElements = options.map(option => {
+        return (
+            <li 
+                key={nanoid()}
+                className='question-option'
+                onClick={props.handleClick}
+                    >
+                    {decode(option)}
+            </li>)
+    })
     
     return (
         <div className='question-container'>
