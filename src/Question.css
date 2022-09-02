@@ -19,11 +19,3 @@
     display: flex;
     gap: 1.5rem;
 }
-
-.question-option {
-    border: solid rgba(77, 91, 158, 1) 1px;
-    border-radius: 0.5rem;
-    font-size: 1.5rem;
-    padding: 1vh 3vh;
-
-}

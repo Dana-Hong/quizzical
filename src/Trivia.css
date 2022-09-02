@@ -12,7 +12,12 @@
     gap: 1.5rem;
 }
 
-.trivia-back-to-main-button {
+.trivia-button-container {
+    display: flex;
+    gap: 2rem;
+}
+
+.trivia-check-answers-button, .trivia-back-to-main-button {
     border: none;
     height: 2.5rem;
     width: 15rem;
@@ -22,6 +27,6 @@
     font-size: 1.25rem;
 }
 
-.trivia-back-to-main-button:hover {
+.trivia-check-answers-button, .trivia-back-to-main-button:hover {
     cursor: pointer;
 }

@@ -5,8 +5,13 @@ import yellow_blob from './yellow_blob.png';
 import blue_blob from './blue_blob.png';
 
 export const Trivia = (props) => {
-    const questionElements = props.triviaData.map(questionData => {
-        return <Question data={questionData} handleClick={() => {console.log('hey')}} />
+    const questionElements = props.triviaData.map((questionData, index) => {
+        return (
+            <Question
+                key={index}
+                questionData={questionData}
+                handleOptionSelect={props.handleOptionSelect}
+            />)
     })
 
     return (
@@ -16,12 +21,21 @@ export const Trivia = (props) => {
             <div className='trivia-questions-container'>
                 {questionElements}
             </div>
-            <button 
-                className='trivia-back-to-main-button'
-                onClick={props.handleClick}
-                >
-                    Back to Main Menu
-            </button>
+            <div>You got some answers right.</div>
+            <div className='trivia-button-container'>
+                <button
+                    className='trivia-check-answers-button'
+                    onClick={props.handleCheckAnswers}
+                    >
+                        Check Answers
+                </button>
+                <button
+                    className='trivia-back-to-main-button'
+                    onClick={props.handleClick}
+                    >
+                        Back to Main Menu
+                </button>
+            </div>
         </div>
     )
 }
