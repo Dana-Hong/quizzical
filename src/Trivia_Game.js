@@ -5,7 +5,6 @@ import { Trivia } from "./Trivia";
 export const Trivia_Game = () => {
     let [gameStart, setgameStart] = React.useState(false);
     let [shouldGetTriviaData, setShouldGetTriviaData] = React.useState(true);
-    // let [questionData, setQuestionData] = React.useState([]);
     let [triviaData, setTriviaData] = React.useState([]);
 
     const handleClick = (event) => {
@@ -13,7 +12,6 @@ export const Trivia_Game = () => {
         if (event.target.textContent === "Back to Main Menu") {
             setShouldGetTriviaData(prevShouldGetTriviaData => !prevShouldGetTriviaData);
         }
-        // console.log(triviaData);
     }
     
     const handleOptionSelect = (questionId, optionId) => {
@@ -26,6 +24,11 @@ export const Trivia_Game = () => {
                             return {
                                 ...option,
                                 selected: !option.selected,
+                            }
+                        } else if (option.id !== optionId && option.selected) {
+                            return {
+                                ...option,
+                                selected: !option.selected
                             }
                         } else {
                             return option;

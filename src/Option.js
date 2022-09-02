@@ -7,8 +7,7 @@ export const Option = (props) => {
     let styles = {
         backgroundColor: ""
     }
-    // let selectedColor = props.optionData.selected ? "#d6dbf5" : "inherit"
-    // let correctColor = props.optionData.correct === false ? "#f8bcbc" : "#94d7a2"
+
     if (props.optionData.selected) {
         if (props.optionData.correct === true) {
             styles.backgroundColor = "#94d7a2";
