@@ -17,7 +17,6 @@ export const Option = (props) => {
             styles.backgroundColor = "#d6dbf5";
         }
     } else if (props.optionData.correct) {
-        console.log('hey')
         styles.backgroundColor = "#94d7a2";
     } else {
         styles.backgroundColor = "inherit";

@@ -6,6 +6,8 @@ export const Trivia_Game = () => {
     let [gameStart, setgameStart] = React.useState(false);
     let [shouldGetTriviaData, setShouldGetTriviaData] = React.useState(true);
     let [triviaData, setTriviaData] = React.useState([]);
+    let [answersChecked, setAnswersChecked] = React.useState(false);
+    let [correctAnswerCount, setCorrectAnswerCount] = React.useState(0);
 
     const handleClick = (event) => {
         setgameStart(prevGameStart => !prevGameStart);    
@@ -15,56 +17,57 @@ export const Trivia_Game = () => {
     }
     
     const handleOptionSelect = (questionId, optionId) => {
-        // Add setQuestionCount to check if all questions have been answered?
-        setTriviaData(prevTriviaData => {
-            return prevTriviaData.map(question => {
-                if (question.questionId === questionId) {
-                    let updatedOptions = question.potential_answers.map(option => {
-                        if (option.id === optionId) {
-                            return {
-                                ...option,
-                                selected: !option.selected,
+        if (!answersChecked) {
+            setTriviaData(prevTriviaData => {
+                return prevTriviaData.map(question => {
+                    if (question.questionId === questionId) {
+                        let updatedOptions = question.potential_answers.map(option => {
+                            if (option.id === optionId) {
+                                return {
+                                    ...option,
+                                    selected: !option.selected,
+                                }
+                            } else if (option.id !== optionId && option.selected) {
+                                return {
+                                    ...option,
+                                    selected: !option.selected
+                                }
+                            } else {
+                                return option;
                             }
-                        } else if (option.id !== optionId && option.selected) {
-                            return {
-                                ...option,
-                                selected: !option.selected
-                            }
-                        } else {
-                            return option;
+                        });
+                        return {
+                            ...question,
+                            potential_answers: updatedOptions,
+                            questionAnswered: true,
                         }
-                    });
-                    return {
-                        ...question,
-                        potential_answers: updatedOptions,
-                        questionAnswered: true,
+                    } else {
+                        return question;
                     }
-                } else {
-                    return question;
-                }
+                })
             })
-        })
+        }
+        // Add setQuestionCount to check if all questions have been answered?
     }
 
     const handleCheckAnswers = () => {
+        let correctAnswerCount;
+        setAnswersChecked(prevAnswersChecked => !prevAnswersChecked);
         setTriviaData(prevTriviaData => {
             return prevTriviaData.map(question => {
-                if (question.questionAnswered) {
-                    let updatedAnswers = question.potential_answers.map(option => {
-                        return {
-                            ...option,
-                            correct: option.answer === question.correct_answer
-                        }
-                    });
+                let updatedAnswers = question.potential_answers.map(option => {
                     return {
-                        ...question,
-                        potential_answers: updatedAnswers
-                    };
-                } else {
-                    return question;
-                }
+                        ...option,
+                        correct: option.answer === question.correct_answer
+                    }
+                });
+                return {
+                    ...question,
+                    potential_answers: updatedAnswers
+                };
             });
         });
+
     }
 
 
@@ -111,6 +114,7 @@ export const Trivia_Game = () => {
                 triviaData={triviaData}
                 handleOptionSelect={handleOptionSelect}
                 handleCheckAnswers={handleCheckAnswers}
+                answersChecked={answersChecked}
             />
     )
 }

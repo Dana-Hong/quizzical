@@ -11,6 +11,7 @@ export const Trivia = (props) => {
                 key={index}
                 questionData={questionData}
                 handleOptionSelect={props.handleOptionSelect}
+                answersChecked={props.answersChecked}
             />)
     })
 

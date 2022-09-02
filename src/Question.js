@@ -5,6 +5,9 @@ import { decode } from 'html-entities';
 import { nanoid } from 'nanoid';
 
 export const Question = (props) => {
+    let styles = {
+        color: props.answersChecked && !props.questionData.questionAnswered ? "red" : "inherit"
+    }
     const optionElements = props.questionData.potential_answers.map(option => {
         return (
             <Option
@@ -17,7 +20,12 @@ export const Question = (props) => {
     
     return (
         <div className='question-container'>
-            <h3 className='question-question'>{decode(props.questionData.question)}</h3>
+            <h3 
+                className='question-question'
+                style={styles}
+                >
+                    {decode(props.questionData.question)}
+            </h3>
             <ul className='question-option-list'>
                 {optionElements}
             </ul>
