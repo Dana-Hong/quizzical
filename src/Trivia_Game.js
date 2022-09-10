@@ -13,6 +13,7 @@ export const Trivia_Game = () => {
         setgameStart(prevGameStart => !prevGameStart);    
         if (event.target.textContent === "Back to Main Menu") {
             setShouldGetTriviaData(prevShouldGetTriviaData => !prevShouldGetTriviaData);
+            setAnswersChecked(false);
         }
     }
     
@@ -20,9 +21,11 @@ export const Trivia_Game = () => {
         if (!answersChecked) {
             setTriviaData(prevTriviaData => {
                 return prevTriviaData.map(question => {
+                    let selectedOption;
                     if (question.questionId === questionId) {
                         let updatedOptions = question.potential_answers.map(option => {
                             if (option.id === optionId) {
+                                selectedOption = option.answer;
                                 return {
                                     ...option,
                                     selected: !option.selected,
@@ -40,19 +43,34 @@ export const Trivia_Game = () => {
                             ...question,
                             potential_answers: updatedOptions,
                             questionAnswered: true,
+                            selectedOption: selectedOption
                         }
                     } else {
                         return question;
                     }
                 })
-            })
+            });
         }
-        // Add setQuestionCount to check if all questions have been answered?
     }
 
+    // const handleOptionSelect = (questionId, optionId) => {
+    //     let updatedOption = !triviaData[questionId].potential_answers[optionId].selected;
+    //     triviaData.map(question => {
+    //         if (questionId === question.questionId) {
+    //             return 
+    //         }
+    //     })
+    // }
+
     const handleCheckAnswers = () => {
-        let correctAnswerCount;
-        setAnswersChecked(prevAnswersChecked => !prevAnswersChecked);
+        setAnswersChecked(true);
+        setCorrectAnswerCount(() => {
+            let correctAnswers = 0;
+            triviaData.forEach(question => {
+                return question.correct_answer === question.selectedOption ? correctAnswers++ : correctAnswers
+            });
+            return correctAnswers;
+        });
         setTriviaData(prevTriviaData => {
             return prevTriviaData.map(question => {
                 let updatedAnswers = question.potential_answers.map(option => {
@@ -63,7 +81,8 @@ export const Trivia_Game = () => {
                 });
                 return {
                     ...question,
-                    potential_answers: updatedAnswers
+                    potential_answers: updatedAnswers,
+                    questionCorrectlyAnswered: "doggeagea"
                 };
             });
         });
@@ -72,7 +91,7 @@ export const Trivia_Game = () => {
 
 
     React.useEffect(() => {
-        fetch("https://opentdb.com/api.php?amount=5&type=multiple")
+        fetch("https://opentdb.com/api.php?amount=6&type=multiple")
             .then(response => response.json())
             .then(data => data.results)
             .then(resultsData => {
@@ -101,9 +120,9 @@ export const Trivia_Game = () => {
             
         }, [shouldGetTriviaData]);  
     
-    React.useEffect(() => {
-        console.log(triviaData);
-    })
+    // React.useEffect(() => {
+    //     console.log(triviaData, correctAnswerCount);
+    // })
         
     return (
         gameStart === false ? 
@@ -115,6 +134,7 @@ export const Trivia_Game = () => {
                 handleOptionSelect={handleOptionSelect}
                 handleCheckAnswers={handleCheckAnswers}
                 answersChecked={answersChecked}
+                correctAnswerCount={correctAnswerCount}
             />
     )
 }

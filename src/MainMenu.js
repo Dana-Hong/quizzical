@@ -11,6 +11,12 @@ export const MainMenu = (props) => {
             <div className='main-menu-content'>
                 <h1>Quizzical</h1>
                 <h4>An exciting trivia game!</h4>
+                <select
+                    name="game-options">
+                        <option>Easy</option>
+                        <option>Medium</option>
+                        <option>Hard</option>
+                </select>
                 <button 
                     className='main-menu--start-button' 
                     onClick={props.handleClick}

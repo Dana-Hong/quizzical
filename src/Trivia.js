@@ -5,6 +5,9 @@ import yellow_blob from './yellow_blob.png';
 import blue_blob from './blue_blob.png';
 
 export const Trivia = (props) => {
+    let styles = {
+        color: props.answersChecked ? "rgba(41, 50, 100, 1)" : "white"
+    }
     const questionElements = props.triviaData.map((questionData, index) => {
         return (
             <Question
@@ -22,7 +25,12 @@ export const Trivia = (props) => {
             <div className='trivia-questions-container'>
                 {questionElements}
             </div>
-            <div>You got some answers right.</div>
+            <div 
+                className='trivia-end-game-message'
+                style={styles}
+                >
+                    {`You scored ${props.correctAnswerCount} / ${props.triviaData.length} answers correct`}
+            </div>
             <div className='trivia-button-container'>
                 <button
                     className='trivia-check-answers-button'
