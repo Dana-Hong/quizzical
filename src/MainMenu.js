@@ -12,10 +12,17 @@ export const MainMenu = (props) => {
                 <h1>Quizzical</h1>
                 <h4>An exciting trivia game!</h4>
                 <select
-                    name="game-options">
-                        <option>Easy</option>
-                        <option>Medium</option>
-                        <option>Hard</option>
+                    onChange={props.handleOnChange}
+                    name="number-of-questions">
+                        <option value={"3"}>3</option>
+                        <option value={"10"}>10</option>
+                </select>
+                <select
+                    onChange={props.handleOnChange}
+                    name="difficulty">
+                        <option value={"easy"}>Easy</option>
+                        <option value={"medium"}>Medium</option>
+                        <option value={"hard"}>Hard</option>
                 </select>
                 <button 
                     className='main-menu--start-button' 

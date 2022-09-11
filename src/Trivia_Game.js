@@ -8,12 +8,32 @@ export const Trivia_Game = () => {
     let [triviaData, setTriviaData] = React.useState([]);
     let [answersChecked, setAnswersChecked] = React.useState(false);
     let [correctAnswerCount, setCorrectAnswerCount] = React.useState(0);
+    let [questionConstraints, setQuestionConstraints] = React.useState({});
 
     const handleClick = (event) => {
         setgameStart(prevGameStart => !prevGameStart);    
         if (event.target.textContent === "Back to Main Menu") {
             setShouldGetTriviaData(prevShouldGetTriviaData => !prevShouldGetTriviaData);
             setAnswersChecked(false);
+        }
+    }
+
+    const handleOnChange = (event) => {
+        if (event.target.name === "number-of-questions") {
+            setQuestionConstraints(prevQuestionContraints => {
+                return {
+                    ...prevQuestionContraints,
+                    amount: event.target.value
+                }
+            });
+        } else if (event.target.name === "difficulty") {
+            setQuestionConstraints(prevQuestionContraints => {
+                return {
+                    ...prevQuestionContraints,
+                    difficulty: event.target.value
+                }
+            });
+
         }
     }
     
@@ -82,7 +102,7 @@ export const Trivia_Game = () => {
                 return {
                     ...question,
                     potential_answers: updatedAnswers,
-                    questionCorrectlyAnswered: "doggeagea"
+                    // questionCorrectlyAnswered: "doggeagea"
                 };
             });
         });
@@ -91,7 +111,7 @@ export const Trivia_Game = () => {
 
 
     React.useEffect(() => {
-        fetch("https://opentdb.com/api.php?amount=6&type=multiple")
+        fetch(`https://opentdb.com/api.php?amount=${questionConstraints.amount}&difficulty=${questionConstraints.difficulty}&type=multiple`)
             .then(response => response.json())
             .then(data => data.results)
             .then(resultsData => {
@@ -120,14 +140,18 @@ export const Trivia_Game = () => {
             
         }, [shouldGetTriviaData]);  
     
-    // React.useEffect(() => {
-    //     console.log(triviaData, correctAnswerCount);
-    // })
+    React.useEffect(() => {
+        // console.log(triviaData, correctAnswerCount);
+        console.log(questionConstraints);
+    })
         
     return (
         gameStart === false ? 
             <MainMenu 
-                handleClick={handleClick} /> :
+                handleClick={handleClick} 
+                handleOnChange={handleOnChange}
+                questionConstraints={questionConstraints}
+            /> :
             <Trivia 
                 handleClick={handleClick}
                 triviaData={triviaData}
