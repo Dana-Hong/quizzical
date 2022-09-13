@@ -8,13 +8,17 @@ export const Trivia_Game = () => {
     let [triviaData, setTriviaData] = React.useState([]);
     let [answersChecked, setAnswersChecked] = React.useState(false);
     let [correctAnswerCount, setCorrectAnswerCount] = React.useState(0);
-    let [questionConstraints, setQuestionConstraints] = React.useState({});
+    let [questionConstraints, setQuestionConstraints] = React.useState({amount: 5, difficulty: "easy"});
+    let [fetchRequestFinished, setFetchRequestFinished] = React.useState(false);
 
     const handleClick = (event) => {
-        setgameStart(prevGameStart => !prevGameStart);    
-        if (event.target.textContent === "Back to Main Menu") {
-            setShouldGetTriviaData(prevShouldGetTriviaData => !prevShouldGetTriviaData);
-            setAnswersChecked(false);
+        if (fetchRequestFinished) {
+            setgameStart(prevGameStart => !prevGameStart);    
+            if (event.target.textContent === "Back to Main Menu") {
+                setShouldGetTriviaData(prevShouldGetTriviaData => !prevShouldGetTriviaData);
+                setAnswersChecked(false);
+                setFetchRequestFinished(false);
+            }
         }
     }
 
@@ -136,9 +140,10 @@ export const Trivia_Game = () => {
                 });
                 return modifiedResults;
             })
-            .then(modifiedResults => setTriviaData(modifiedResults));
+            .then(modifiedResults => setTriviaData(modifiedResults))
+            .then(setFetchRequestFinished(true));         
             
-        }, [shouldGetTriviaData]);  
+    }, [shouldGetTriviaData, questionConstraints]);  
     
     React.useEffect(() => {
         // console.log(triviaData, correctAnswerCount);

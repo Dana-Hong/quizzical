@@ -14,7 +14,7 @@ export const MainMenu = (props) => {
                 <select
                     onChange={props.handleOnChange}
                     name="number-of-questions">
-                        <option value={"3"}>3</option>
+                        <option value={"5"}>5</option>
                         <option value={"10"}>10</option>
                 </select>
                 <select
