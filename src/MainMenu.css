@@ -57,3 +57,17 @@ h4 {
 .main-menu--start-button:hover {
     cursor: pointer;
 }
+
+
+.main-menu-option {
+    margin-bottom: .75em;
+}
+
+.option-title {
+    font-size: 1.5rem;
+    margin-bottom: .5em;
+}
+
+.option-select {
+    font-size: 1.125rem;
+}
