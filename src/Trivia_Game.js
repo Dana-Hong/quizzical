@@ -25,6 +25,12 @@ export const Trivia_Game = () => {
                 setShouldGetTriviaData(prevShouldGetTriviaData => !prevShouldGetTriviaData);
                 setAnswersChecked(false);
                 setFetchRequestFinished(false);
+                setQuestionConstraints({
+                    amount: "5",
+                    category: "9",
+                    difficulty: "easy",
+                    type: "multiple"
+                });
             }
         }
     }
@@ -36,25 +42,8 @@ export const Trivia_Game = () => {
                 [event.target.name]: event.target.value,
             }
         })
-        console.log(questionConstraints);
     }
 
-        // if (event.target.name === "number-of-questions") {
-        //     setQuestionConstraints(prevQuestionContraints => {
-        //         return {
-        //             ...prevQuestionContraints,
-        //             amount: event.target.value
-        //         }
-        //     });
-        // } else if (event.target.name === "difficulty") {
-        //     setQuestionConstraints(prevQuestionContraints => {
-        //         return {
-        //             ...prevQuestionContraints,
-        //             difficulty: event.target.value
-        //         }
-        //     });
-        // }
-    
     const handleOptionSelect = (questionId, optionId) => {
         if (!answersChecked) {
             setTriviaData(prevTriviaData => {
@@ -94,15 +83,11 @@ export const Trivia_Game = () => {
     const handleCheckAnswers = () => {
         setAnswersChecked(true);
         setCorrectAnswerCount(() => {
-            let correctAnswers = 0;
-            triviaData.forEach(question => {
-                return question.correct_answer === question.selectedOption ? correctAnswers++ : correctAnswers
-            });
-            return correctAnswers;
+            return triviaData.filter(question => question.correct_answer === question.selectedOption).length;
         });
         setTriviaData(prevTriviaData => {
             return prevTriviaData.map(question => {
-                let updatedAnswers = question.potential_answers.map(option => {
+                const updatedAnswers = question.potential_answers.map(option => {
                     return {
                         ...option,
                         correct: option.answer === question.correct_answer
@@ -117,26 +102,37 @@ export const Trivia_Game = () => {
 
     }
 
+    const getRandomNumberFloor = (range) => {
+        return Math.floor(Math.random() * range);
+    }
+
     React.useEffect(() => {
         const {amount, category, difficulty, type} = questionConstraints;
         fetch(`https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}&type=${type}`)
-            .then(response => response.json())
-            .then(data => data.results)
-            .then(resultsData => {
-                let modifiedResults = resultsData.map((questionObject, index) => {
-                    let randomIndex = Math.floor(Math.random() * questionObject.incorrect_answers.length);
-                    let potential_answers = [...questionObject.incorrect_answers];
-                    potential_answers.splice(randomIndex, 0, questionObject.correct_answer);
-                    let options = potential_answers.map((answer, index) => {
+            .then(response => {
+                if (!response.ok) {
+                    throw Error();
+                }
+                return response.json();
+            })
+            .then(data => {
+                if (data.response_code === 2) {
+                    throw Error();
+                }
+                const modifiedResults = data.results.map((question, index) => {
+                    const randomIndex = getRandomNumberFloor(question.incorrect_answers.length);
+                    let potential_answers = [...question.incorrect_answers];
+                    potential_answers.splice(randomIndex, 0, question.correct_answer);
+                    const options = potential_answers.map((answer, index) => {
                         return {
                             answer: answer,
                             id: index,
                             selected: false,
                             correct: null
                         }
-                    })
+                    });
                     return {
-                        ...questionObject,
+                        ...question,
                         potential_answers: options,
                         questionId: index,
                         questionAnswered: false
@@ -145,7 +141,10 @@ export const Trivia_Game = () => {
                 return modifiedResults;
             })
             .then(modifiedResults => setTriviaData(modifiedResults))
-            .then(setFetchRequestFinished(true));         
+            .then(setFetchRequestFinished(true))
+            .catch(err => {
+                console.log("Something went wrong");
+            });         
             
     }, [shouldGetTriviaData, questionConstraints]);  
     

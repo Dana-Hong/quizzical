@@ -24,7 +24,7 @@ export const Question = (props) => {
                 className='question-question'
                 style={styles}
                 >
-                    {decode(props.questionData.question)}
+                    {`${decode(props.questionData.question)}`}
             </h3>
             <ul className='question-option-list'>
                 {optionElements}
