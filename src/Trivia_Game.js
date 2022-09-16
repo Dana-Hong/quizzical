@@ -8,7 +8,14 @@ export const Trivia_Game = () => {
     let [triviaData, setTriviaData] = React.useState([]);
     let [answersChecked, setAnswersChecked] = React.useState(false);
     let [correctAnswerCount, setCorrectAnswerCount] = React.useState(0);
-    let [questionConstraints, setQuestionConstraints] = React.useState({amount: 5, difficulty: "easy"});
+    let [questionConstraints, setQuestionConstraints] = React.useState(
+        {
+            amount: "5",
+            category: "9",
+            difficulty: "easy",
+            type: "multiple"
+        }
+    );
     let [fetchRequestFinished, setFetchRequestFinished] = React.useState(false);
 
     const handleClick = (event) => {
@@ -23,23 +30,30 @@ export const Trivia_Game = () => {
     }
 
     const handleOnChange = (event) => {
-        if (event.target.name === "number-of-questions") {
-            setQuestionConstraints(prevQuestionContraints => {
-                return {
-                    ...prevQuestionContraints,
-                    amount: event.target.value
-                }
-            });
-        } else if (event.target.name === "difficulty") {
-            setQuestionConstraints(prevQuestionContraints => {
-                return {
-                    ...prevQuestionContraints,
-                    difficulty: event.target.value
-                }
-            });
-
-        }
+        setQuestionConstraints(prevQuestionContraints => {
+            return {
+                ...prevQuestionContraints,
+                [event.target.name]: event.target.value,
+            }
+        })
+        console.log(questionConstraints);
     }
+
+        // if (event.target.name === "number-of-questions") {
+        //     setQuestionConstraints(prevQuestionContraints => {
+        //         return {
+        //             ...prevQuestionContraints,
+        //             amount: event.target.value
+        //         }
+        //     });
+        // } else if (event.target.name === "difficulty") {
+        //     setQuestionConstraints(prevQuestionContraints => {
+        //         return {
+        //             ...prevQuestionContraints,
+        //             difficulty: event.target.value
+        //         }
+        //     });
+        // }
     
     const handleOptionSelect = (questionId, optionId) => {
         if (!answersChecked) {
@@ -77,15 +91,6 @@ export const Trivia_Game = () => {
         }
     }
 
-    // const handleOptionSelect = (questionId, optionId) => {
-    //     let updatedOption = !triviaData[questionId].potential_answers[optionId].selected;
-    //     triviaData.map(question => {
-    //         if (questionId === question.questionId) {
-    //             return 
-    //         }
-    //     })
-    // }
-
     const handleCheckAnswers = () => {
         setAnswersChecked(true);
         setCorrectAnswerCount(() => {
@@ -106,16 +111,15 @@ export const Trivia_Game = () => {
                 return {
                     ...question,
                     potential_answers: updatedAnswers,
-                    // questionCorrectlyAnswered: "doggeagea"
                 };
             });
         });
 
     }
 
-
     React.useEffect(() => {
-        fetch(`https://opentdb.com/api.php?amount=${questionConstraints.amount}&difficulty=${questionConstraints.difficulty}&type=multiple`)
+        const {amount, category, difficulty, type} = questionConstraints;
+        fetch(`https://opentdb.com/api.php?amount=${amount}&category=${category}&difficulty=${difficulty}&type=${type}`)
             .then(response => response.json())
             .then(data => data.results)
             .then(resultsData => {

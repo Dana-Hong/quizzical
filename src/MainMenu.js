@@ -17,7 +17,7 @@ export const MainMenu = (props) => {
                         <select
                             className='option-select'
                             onChange={props.handleOnChange}
-                            name="number-of-questions">
+                            name="amount">
                                 <option value={"5"}>5</option>
                                 <option value={"10"}>10</option>
                         </select>
@@ -27,7 +27,7 @@ export const MainMenu = (props) => {
                         <select
                             className='option-select'
                             onChange={props.handleOnChange}
-                            name="number-of-questions">
+                            name="category">
                                 <option value="9">General Knowledge</option>
                                 <option value="10">Entertainment: Books</option>
                                 <option value="11">Entertainment: Film</option>
@@ -70,7 +70,7 @@ export const MainMenu = (props) => {
                         <select
                         className='option-select'
                             onChange={props.handleOnChange}
-                            name="difficulty">
+                            name="type">
                                 <option value="any">Any Type</option>
                                 <option value="multiple">Multiple Choice</option>
                                 <option value="boolean">True / False</option>
