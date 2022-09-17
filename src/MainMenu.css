@@ -32,6 +32,7 @@
     justify-content: center;
     align-items: center;
     gap: 2rem;
+    width: 60%;
 }
 
 h1 {
@@ -40,18 +41,21 @@ h1 {
 }
 
 h4 {
-    font-size: 2rem;
+    font-size: 1.75rem;
     font-weight: 300;
+    width: 50%;
+    min-width: 500px;
+    line-height: 1.25;
 }
 
 .main-menu--start-button {
     border: none;
-    height: 5rem;
-    width: 20rem;
+    padding: 0.3em 1.125em;
     background: rgba(77, 91, 158, 1);
-    border-radius: 15px;
+    border-radius: 10px;
     color: rgba(245, 247, 251, 1);
     font-size: 2rem;
+    font-weight: 400;
 }
 
 .main-menu--start-button:hover {
@@ -63,12 +67,14 @@ h4 {
 }
 
 .option-title {
-    font-size: 1.5rem;
+    font-size: 1.75rem;
     letter-spacing: 1.5px;
-    margin-bottom: .5em;
+    margin: .75em 0;
 }
 
 .option-select {
+    border: solid 1px rgba(41, 50, 100, 1);
+    border-radius: 5px;
     padding: 0.75rem;
     width: 100%;
 }
@@ -76,8 +82,6 @@ h4 {
 .main-menu-option {
     margin-bottom: .75em;
 }
-
-
 
 .option-select {
     font-size: 1.125rem;

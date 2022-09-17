@@ -2,7 +2,7 @@ import React from "react";
 import { MainMenu } from "./MainMenu";
 import { Trivia } from "./Trivia";
 
-export const Trivia_Game = () => {
+export const TriviaGame = () => {
     let [gameStart, setgameStart] = React.useState(false);
     let [shouldGetTriviaData, setShouldGetTriviaData] = React.useState(true);
     let [triviaData, setTriviaData] = React.useState([]);
@@ -149,7 +149,7 @@ export const Trivia_Game = () => {
     }, [shouldGetTriviaData, questionConstraints]);  
     
     React.useEffect(() => {
-        // console.log(triviaData, correctAnswerCount);
+        console.log(`trivia data: ${triviaData}`);
         console.log(questionConstraints);
     })
         

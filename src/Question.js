@@ -21,15 +21,14 @@ export const Question = (props) => {
     return (
         <div className='question-container'>
             <h3 
-                className='question-question'
+                className='question'
                 style={styles}
                 >
                     {`${decode(props.questionData.question)}`}
             </h3>
-            <ul className='question-option-list'>
+            <div className='question-option-list'>
                 {optionElements}
-            </ul>
-            <hr></hr>
+            </div>
 
         </div>
     )

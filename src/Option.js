@@ -22,13 +22,13 @@ export const Option = (props) => {
         styles.backgroundColor = "inherit";
     }
     return (
-        <li 
+        <button 
             key={nanoid()}
             className='option'
             style={styles}
             onClick={(event) => props.handleOptionSelect(props.questionId, props.optionData.id, event)}
                 >
                 {decode(props.optionData.answer)}
-        </li>
+        </button>
     )
 }

@@ -10,7 +10,7 @@ export const MainMenu = (props) => {
             <img src={blue_blob} className='blue-blob' alt='blue-blob' />
             <div className='main-menu-content'>
                 <h1>Quizzical</h1>
-                <h4>An exciting trivia game!</h4>
+                <h4>Test your trivia knowledge. Select your desired categories and question preferences, then hit the start button. Do you have what it takes to become the ultimate trivia master?</h4>
                 <div className='main-menu-options-container'>
                     <div className='main-menu-option'>
                         <h5 className='option-title'>Number of questions:</h5>

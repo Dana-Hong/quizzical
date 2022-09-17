@@ -1,12 +1,10 @@
 import React from 'react';
 import './Trivia.css';
 import { Question } from './Question';
-import yellow_blob from './yellow_blob.png';
-import blue_blob from './blue_blob.png';
 
 export const Trivia = (props) => {
     let styles = {
-        color: props.answersChecked ? "rgba(41, 50, 100, 1)" : "white"
+        color: props.answersChecked ? "rgba(41, 50, 100, 1)" : "inherit"
     }
     const questionElements = props.triviaData.map((questionData, index) => {
         return (
@@ -19,19 +17,17 @@ export const Trivia = (props) => {
     })
 
     return (
-        <div className='trivia-page'>
-            <img src={yellow_blob} className='yellow-blob' alt='yellow-blob' />
-            <img src={blue_blob} className='blue-blob' alt='blue-blob' />
+        <section className='trivia-page'>
             <div className='trivia-questions-container'>
                 {questionElements}
             </div>
-            <div 
+            <p 
                 className='trivia-end-game-message'
                 style={styles}
                 >
-                    {`You scored ${props.correctAnswerCount} / ${props.triviaData.length} answers correct`}
-            </div>
-            <div className='trivia-button-container'>
+                {props.answersChecked? `You scored ${props.correctAnswerCount} / ${props.triviaData.length} answers correct` : ''}    
+            </p>
+            <div className='trivia-buttons-container'>
                 <button
                     className='trivia-check-answers-button'
                     onClick={props.handleCheckAnswers}
@@ -45,6 +41,6 @@ export const Trivia = (props) => {
                         Back to Main Menu
                 </button>
             </div>
-        </div>
+        </section>
     )
 }
