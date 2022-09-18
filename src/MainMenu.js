@@ -1,16 +1,12 @@
 import React from 'react';
 import './MainMenu.css';
-import yellow_blob from './yellow_blob.png';
-import blue_blob from './blue_blob.png';
 
 export const MainMenu = (props) => {
     return (
         <div className='main-menu'>
-            <img src={yellow_blob} className='yellow-blob' alt='yellow-blob' />
-            <img src={blue_blob} className='blue-blob' alt='blue-blob' />
             <div className='main-menu-content'>
-                <h1>Quizzical</h1>
-                <h4>Test your trivia knowledge. Select your desired categories and question preferences, then hit the start button. Do you have what it takes to become the ultimate trivia master?</h4>
+                <h1 className='title'>Quizzical</h1>
+                <h4 className='description'>Test your trivia knowledge. Select your desired categories and question preferences, then hit the start button. Do you have what it takes to become the ultimate trivia master?</h4>
                 <div className='main-menu-options-container'>
                     <div className='main-menu-option'>
                         <h5 className='option-title'>Number of questions:</h5>

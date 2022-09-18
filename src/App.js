@@ -1,4 +1,3 @@
-import './App.css';
 import { TriviaGame } from './TriviaGame';
 
 function App() {

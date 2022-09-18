@@ -5,7 +5,7 @@ import { nanoid } from 'nanoid';
 
 export const Option = (props) => {
     let styles = {
-        backgroundColor: ""
+        backgroundColor: "",
     }
 
     if (props.optionData.selected) {
