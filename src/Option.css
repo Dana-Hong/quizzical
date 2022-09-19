@@ -1,4 +1,5 @@
-/* .option {
+.option {
+    font-family: Karla;
     border: solid rgba(77, 91, 158, 1) 1px;
     border-radius: 0.5rem;
     font-size: 1.5rem;
@@ -9,4 +10,10 @@
 
 .option:first-of-type {
     margin: 0 1em 0 0;
-} */
+}
+
+@media (max-width: 2100px) {
+    .option:first-of-type {
+        margin: 0 1em;
+    }
+}

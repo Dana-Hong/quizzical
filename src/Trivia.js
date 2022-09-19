@@ -25,7 +25,7 @@ export const Trivia = (props) => {
                 className='trivia-end-game-message'
                 style={styles}
                 >
-                {props.answersChecked? `You scored ${props.correctAnswerCount} / ${props.triviaData.length} answers correct` : ''}    
+                    {props.answersChecked? `You scored ${props.correctAnswerCount} / ${props.triviaData.length} answers correct` : ''}    
             </p>
             <div className='trivia-buttons-container'>
                 <button

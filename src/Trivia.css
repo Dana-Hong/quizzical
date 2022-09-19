@@ -1,15 +1,24 @@
-/* .trivia-page {
-    padding: 4.25em;
+.trivia-page {
+    min-height: 100vh;
+}
+.trivia-questions-container {
+    margin: 0 auto;
+    padding-top: 5em;
 }
 
-.trivia-questions-container {
-    width: 90%;
-    margin: 0 auto;
+.trivia-end-game-message {
+    margin: .75em 0;
+    height: 1.5em;
+    font-weight: 700;
+    font-size: 2rem;
+    text-align: center;
+    color: rgba(41, 50, 100, 1);
 }
 
 .trivia-buttons-container {
+
     width: 35%;
-    margin: 0 auto;
+    margin: 0 auto 5em;
     display: flex;
     justify-content: space-evenly;
 }
@@ -23,12 +32,7 @@
     font-size: 1.25rem;
     cursor: pointer;
 }
+/*
 
-.trivia-end-game-message {
-    margin: .75em 0;
-    height: 1.5em;
-    font-weight: 700;
-    font-size: 2rem;
-    text-align: center;
-    color: rgba(41, 50, 100, 1);
-} */
+
+*/

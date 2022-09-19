@@ -1,14 +1,16 @@
 import React from "react";
 import { MainMenu } from "./MainMenu";
 import { Trivia } from "./Trivia";
+import { ErrorPage } from "./ErrorPage";
 
 export const TriviaGame = () => {
-    let [gameStart, setgameStart] = React.useState(false);
-    let [shouldGetTriviaData, setShouldGetTriviaData] = React.useState(true);
-    let [triviaData, setTriviaData] = React.useState([]);
-    let [answersChecked, setAnswersChecked] = React.useState(false);
-    let [correctAnswerCount, setCorrectAnswerCount] = React.useState(0);
-    let [questionConstraints, setQuestionConstraints] = React.useState(
+    const [gameStart, setgameStart] = React.useState(false);
+    const [shouldGetTriviaData, setShouldGetTriviaData] = React.useState(true);
+    const [triviaData, setTriviaData] = React.useState([]);
+    const [answersChecked, setAnswersChecked] = React.useState(false);
+    const [correctAnswerCount, setCorrectAnswerCount] = React.useState(0);
+    const [errorOccured, setErrorOccured] = React.useState(false);
+    const [questionConstraints, setQuestionConstraints] = React.useState(
         {
             amount: "5",
             category: "9",
@@ -16,7 +18,7 @@ export const TriviaGame = () => {
             type: "multiple"
         }
     );
-    let [fetchRequestFinished, setFetchRequestFinished] = React.useState(false);
+    const [fetchRequestFinished, setFetchRequestFinished] = React.useState(false);
 
     const handleClick = (event) => {
         if (fetchRequestFinished) {
@@ -143,30 +145,35 @@ export const TriviaGame = () => {
             .then(modifiedResults => setTriviaData(modifiedResults))
             .then(setFetchRequestFinished(true))
             .catch(err => {
-                console.log("Something went wrong");
+                setErrorOccured(true);
             });         
             
     }, [shouldGetTriviaData, questionConstraints]);  
     
     React.useEffect(() => {
-        console.log(`trivia data: ${triviaData}`);
         console.log(questionConstraints);
     })
         
-    return (
-        gameStart === false ? 
-            <MainMenu 
-                handleClick={handleClick} 
-                handleOnChange={handleOnChange}
-                questionConstraints={questionConstraints}
-            /> :
-            <Trivia 
-                handleClick={handleClick}
-                triviaData={triviaData}
-                handleOptionSelect={handleOptionSelect}
-                handleCheckAnswers={handleCheckAnswers}
-                answersChecked={answersChecked}
-                correctAnswerCount={correctAnswerCount}
-            />
-    )
+    if (errorOccured) {
+        return (
+            <ErrorPage />
+        )
+    } else {
+        return (
+            gameStart === false ? 
+                <MainMenu 
+                    handleClick={handleClick} 
+                    handleOnChange={handleOnChange}
+                    questionConstraints={questionConstraints}
+                /> :
+                <Trivia 
+                    handleClick={handleClick}
+                    triviaData={triviaData}
+                    handleOptionSelect={handleOptionSelect}
+                    handleCheckAnswers={handleCheckAnswers}
+                    answersChecked={answersChecked}
+                    correctAnswerCount={correctAnswerCount}
+                />
+        )
+    }
 }
