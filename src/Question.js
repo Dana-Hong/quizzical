@@ -8,7 +8,7 @@ export const Question = (props) => {
     let styles = {
         color: props.answersChecked && !props.questionData.questionAnswered ? "red" : "inherit"
     }
-    const optionElements = props.questionData.potential_answers.map(option => {
+    const optionElements = props.questionData.potentialAnswers.map(option => {
         return (
             <Option
                 key={nanoid()}

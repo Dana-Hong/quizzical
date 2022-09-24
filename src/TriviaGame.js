@@ -39,9 +39,10 @@ export const TriviaGame = () => {
 
     const handleOnChange = (event) => {
         setQuestionConstraints(prevQuestionContraints => {
+            const {name, value} = event.target;
             return {
                 ...prevQuestionContraints,
-                [event.target.name]: event.target.value,
+                [name]: value,
             }
         })
     }
@@ -52,7 +53,7 @@ export const TriviaGame = () => {
                 return prevTriviaData.map(question => {
                     let selectedOption;
                     if (question.questionId === questionId) {
-                        let updatedOptions = question.potential_answers.map(option => {
+                        let updatedOptions = question.potentialAnswers.map(option => {
                             if (option.id === optionId) {
                                 selectedOption = option.answer;
                                 return {
@@ -70,7 +71,7 @@ export const TriviaGame = () => {
                         });
                         return {
                             ...question,
-                            potential_answers: updatedOptions,
+                            potentialAnswers: updatedOptions,
                             questionAnswered: true,
                             selectedOption: selectedOption
                         }
@@ -85,19 +86,19 @@ export const TriviaGame = () => {
     const handleCheckAnswers = () => {
         setAnswersChecked(true);
         setCorrectAnswerCount(() => {
-            return triviaData.filter(question => question.correct_answer === question.selectedOption).length;
+            return triviaData.filter(question => question.correctAnswer === question.selectedOption).length;
         });
         setTriviaData(prevTriviaData => {
             return prevTriviaData.map(question => {
-                const updatedAnswers = question.potential_answers.map(option => {
+                const updatedAnswers = question.potentialAnswers.map(option => {
                     return {
                         ...option,
-                        correct: option.answer === question.correct_answer
+                        correct: option.answer === question.correctAnswer
                     }
                 });
                 return {
                     ...question,
-                    potential_answers: updatedAnswers,
+                    potentialAnswers: updatedAnswers,
                 };
             });
         });
@@ -118,14 +119,14 @@ export const TriviaGame = () => {
                 return response.json();
             })
             .then(data => {
-                if (data.response_code === 2) {
+                if (data.response_code === 2 || data.response_code === 1) {
                     throw Error();
                 }
                 const modifiedResults = data.results.map((question, index) => {
                     const randomIndex = getRandomNumberFloor(question.incorrect_answers.length);
-                    let potential_answers = [...question.incorrect_answers];
-                    potential_answers.splice(randomIndex, 0, question.correct_answer);
-                    const options = potential_answers.map((answer, index) => {
+                    let potentialAnswers = [...question.incorrect_answers];
+                    potentialAnswers.splice(randomIndex, 0, question.correct_answer);
+                    const options = potentialAnswers.map((answer, index) => {
                         return {
                             answer: answer,
                             id: index,
@@ -134,8 +135,9 @@ export const TriviaGame = () => {
                         }
                     });
                     return {
-                        ...question,
-                        potential_answers: options,
+                        question: question.question,
+                        correctAnswer: question.correct_answer,
+                        potentialAnswers: options,
                         questionId: index,
                         questionAnswered: false
                     }
@@ -147,7 +149,7 @@ export const TriviaGame = () => {
             .catch(err => {
                 setErrorOccured(true);
             });         
-            
+
     }, [shouldGetTriviaData, questionConstraints]);  
     
     React.useEffect(() => {
