@@ -6,7 +6,7 @@ A simple game to test your trivia knowledge. Questions are pulled from the [Open
 
 Before starting the game, you may choose to modify the number of questions, their category, difficulty, and type.
 
-![Main Menu Screenshot](/imgs/mainMenu.JPG?raw=true "Main Menu")
+![Main Menu Screenshot](/imgs/mainMenu.JPG "Main Menu")
 
 ## Game play
 
