@@ -1,6 +1,6 @@
 # Quizzical - A fun Trivia Game
 
-A simple game to test your trivia knowledge. Questions are pulled from the [Open Trivia Database.]https://opentdb.com/
+A simple game to test your trivia knowledge. Questions are pulled from the [Open Trivia Database.](https://opentdb.com/)
 
 ## Game Options
 
