@@ -6,16 +6,16 @@ A simple game to test your trivia knowledge. Questions are pulled from the [Open
 
 Before starting the game, you may choose to modify the number of questions, their category, difficulty, and type.
 
-![Main Menu Screenshot](./src/imgs/mainMenu.JPG?raw=true "Main Menu")
+![Main Menu Screenshot](./src/imgs/mainMenu.JPG "Main Menu")
 
 ## Game play
 
 After starting the game, you will have an unlimited time to finish the questions. 
 
-![Game Play](./imgs/quizPage.JPG?raw=true "Game play")
+![Game Play](./src/imgs/quizPage.JPG "Game play")
 
 ## Game end
 
-![Game End](/imgs/checkAnswers.JPG?raw=true "Game End")
+![Game End](./src/imgs/checkAnswers.JPG "Game End")
 
 Clicking "check answers" will finish the game. Unselected responses will be marked as incorrect.
